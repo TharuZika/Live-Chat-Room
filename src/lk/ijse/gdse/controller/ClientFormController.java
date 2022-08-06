@@ -1,4 +1,4 @@
 package lk.ijse.gdse.controller;
 
-public class ClientFormController {
+public class ClientFormController{
 }

@@ -1,5 +1,11 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class ClientInitializer extends Application {
 
@@ -8,7 +14,12 @@ public class ClientInitializer extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-
+    public void start(Stage primaryStage) throws IOException {
+        Parent path = FXMLLoader.load(this.getClass().getResource("lk/ijse/gdse/view/ClientForm.fxml"));
+        Scene mainScene = new Scene(path);
+        primaryStage.setScene(mainScene);
+        primaryStage.centerOnScreen();
+        primaryStage.initStyle(StageStyle.UTILITY);
+        primaryStage.show();
     }
 }
