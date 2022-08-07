@@ -25,6 +25,7 @@ public class ServerFormController {
     DataOutputStream dataOutputStream;
     BufferedReader bufferedReader;
 
+    String name = "Server";
     String massage = "";
 
     public void initialize(){
@@ -40,8 +41,10 @@ public class ServerFormController {
 
 //                bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-                massage = dataInputStream.readUTF();
-                System.out.println(massage);
+                while (!massage.equals("exit")) {
+                    massage = dataInputStream.readUTF();
+                    textArea.appendText("\n"+massage);
+                }
 
 
             } catch (IOException e) {
@@ -50,7 +53,11 @@ public class ServerFormController {
         }).start();
     }
 
-    public void sendOnAction(ActionEvent actionEvent) {
+    public void sendOnAction(ActionEvent actionEvent) throws IOException {
+        dataOutputStream.writeUTF(name+" : "+textField.getText().trim());
+        dataOutputStream.flush();
+        textArea.appendText("\n"+name+" : "+textField.getText().trim());
+        textField.clear();
     }
 
     public void btnSendEnteredMouse(MouseEvent event) {

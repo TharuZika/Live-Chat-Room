@@ -32,6 +32,7 @@ public class ClientFormController{
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
+    String name = "User";
     String massage = "";
 
     public void initialize() {
@@ -42,8 +43,10 @@ public class ClientFormController{
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 dataInputStream = new DataInputStream(socket.getInputStream());
 
-                massage = dataInputStream.readUTF();
-                System.out.println(massage);
+                while (!massage.equals("exit")) {
+                    massage = dataInputStream.readUTF();
+                    textArea.appendText("\n"+massage);
+                }
 
 
             } catch (IOException e) {
@@ -53,9 +56,10 @@ public class ClientFormController{
     }
 
     public void sendOnAction(ActionEvent actionEvent) throws IOException {
-        String massageText = textField.getText();
-        dataOutputStream.writeUTF(massageText);
+        dataOutputStream.writeUTF(name+" : "+textField.getText().trim());
         dataOutputStream.flush();
+        textArea.appendText("\n"+name+" : "+textField.getText().trim());
+        textField.clear();
     }
 
     public void btnSendEnteredMouse(MouseEvent event) {

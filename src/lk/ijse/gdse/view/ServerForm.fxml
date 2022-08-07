@@ -40,7 +40,7 @@
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <TextArea fx:id="textArea" layoutX="29.0" layoutY="123.0" prefHeight="495.0" prefWidth="840.0">
+      <TextArea fx:id="textArea" editable="false" layoutX="29.0" layoutY="123.0" prefHeight="495.0" prefWidth="840.0">
          <font>
             <Font size="20.0" />
          </font>
