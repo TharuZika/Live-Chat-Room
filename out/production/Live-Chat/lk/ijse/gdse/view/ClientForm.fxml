@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -9,16 +10,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.controller.ServerFormController">
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.controller.ClientFormController">
    <children>
-      <AnchorPane prefHeight="35.0" prefWidth="900.0" style="-fx-background-color: grey;">
+      <AnchorPane fx:id="stageBar" prefHeight="35.0" prefWidth="900.0" style="-fx-background-color: grey;">
          <children>
-            <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" layoutX="867.0" layoutY="28.0" size="30">
+            <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" layoutX="867.0" layoutY="28.0" onDragDetected="#closeOnAction" size="30">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </FontAwesomeIconView>
-            <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" layoutX="827.0" layoutY="20.0" size="25" wrappingWidth="30.0">
+            <FontAwesomeIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" layoutX="827.0" layoutY="20.0" onDragDetected="#minimizeOnAction" size="25" wrappingWidth="30.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -35,27 +36,27 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="29.0" layoutY="60.0" text="Client">
+      <Label fx:id="lblUser" layoutX="29.0" layoutY="60.0" text="Client">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <TextArea layoutX="29.0" layoutY="123.0" prefHeight="495.0" prefWidth="840.0">
+      <TextArea fx:id="textArea" layoutX="29.0" layoutY="123.0" prefHeight="495.0" prefWidth="840.0">
          <font>
             <Font size="20.0" />
          </font>
       </TextArea>
-      <JFXTextField layoutX="29.0" layoutY="644.0" prefHeight="39.0" prefWidth="721.0" promptText="  Send Massage" style="-fx-background-color: grey; -fx-background-radius: 7;" unFocusColor="#ffffff00">
+      <JFXTextField fx:id="textField" layoutX="29.0" layoutY="644.0" prefHeight="39.0" prefWidth="721.0" promptText="  Send Massage" style="-fx-background-color: #bbd9ed; -fx-background-radius: 7;" unFocusColor="#ffffff00">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <FontAwesomeIconView fill="WHITE" glyphName="CAMERA" layoutX="700.0" layoutY="675.0" size="30">
+      <FontAwesomeIconView fx:id="btnImages" fill="WHITE" glyphName="CAMERA" layoutX="700.0" layoutY="675.0" onMouseClicked="#sendImagesOnAction" size="30">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
-      <JFXButton layoutX="773.0" layoutY="645.0" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: LightBlue; -fx-background-radius: 7;" text="SEND">
+      <JFXButton fx:id="btnSend" layoutX="773.0" layoutY="645.0" onAction="#sendOnAction" onMouseEntered="#btnSendEnteredMouse" onMouseExited="#btnSendExitedMouse" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: #6fbbed; -fx-background-radius: 7;" text="SEND">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -63,5 +64,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXToggleButton fx:id="tglDarkMode" layoutX="737.0" layoutY="49.0" onAction="#darkModeOnAction" prefHeight="58.0" prefWidth="132.0" text="Dark Mode" />
    </children>
 </AnchorPane>
