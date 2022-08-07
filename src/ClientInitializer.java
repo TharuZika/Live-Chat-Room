@@ -19,7 +19,7 @@ public class ClientInitializer extends Application {
         Scene mainScene = new Scene(path);
         primaryStage.setScene(mainScene);
         primaryStage.centerOnScreen();
-        primaryStage.initStyle(StageStyle.UTILITY);
+        primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.show();
     }
 }

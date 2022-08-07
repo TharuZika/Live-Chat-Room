@@ -19,7 +19,7 @@ public class ServerInitializer extends Application {
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         primaryStage.centerOnScreen();
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.show();
     }
 }
