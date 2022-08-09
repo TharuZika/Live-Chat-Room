@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -31,7 +32,7 @@ public class ServerFormController {
     public void initialize(){
         new Thread(() -> {
             try {
-                serverSocket = new ServerSocket(5000);
+                serverSocket = new ServerSocket(PORT);
                 System.out.println("Server Started..");
                 accept = serverSocket.accept();
                 System.out.println("Client Connected..");
@@ -39,7 +40,7 @@ public class ServerFormController {
                 dataOutputStream = new DataOutputStream(accept.getOutputStream());
                 dataInputStream = new DataInputStream(accept.getInputStream());
 
-//                bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+                bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
                 while (!massage.equals("exit")) {
                     massage = dataInputStream.readUTF();
@@ -52,6 +53,7 @@ public class ServerFormController {
             }
         }).start();
     }
+
 
     public void sendOnAction(ActionEvent actionEvent) throws IOException {
         dataOutputStream.writeUTF(name+" : "+textField.getText().trim());
