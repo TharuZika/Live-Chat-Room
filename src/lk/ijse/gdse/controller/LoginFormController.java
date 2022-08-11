@@ -14,7 +14,7 @@ public class LoginFormController {
     public JFXTextField txtIp;
     public JFXTextField txtUserName;
     public static String userName;
-    public static String ipAddress;
+    public static String hostIp;
     public AnchorPane rootPane;
     public Label lblError;
     public AnchorPane borderErrorUsername;
@@ -29,16 +29,17 @@ public class LoginFormController {
             lblError.setVisible(true);
             txtIp.setStyle("-fx-faint-focus-color: red;" + "-fx-focus-color:red;" + "-jfx-unfocus-color:red");
             txtUserName.setStyle("-fx-faint-focus-color: red;" + "-fx-focus-color:red;" + "-jfx-unfocus-color:red");
-            
+
         }else {
 
             userName = txtUserName.getText();
-            ipAddress = txtIp.getText();
+            hostIp = txtIp.getText();
 
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/gdse/view/ClientForm.fxml"))));
+            stage.setTitle(userName);
 
-            System.out.println("IP Address: " + ipAddress + "\nUsername: " + userName);
+            System.out.println("IP Address: " + hostIp + "\nUsername: " + userName);
         }
 
     }

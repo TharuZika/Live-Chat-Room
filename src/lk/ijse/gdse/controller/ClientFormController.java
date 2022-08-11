@@ -9,100 +9,86 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.gdse.bp.Client;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ClientFormController{
     public AnchorPane stageBar;
-    public TextArea textArea;
-    public JFXTextField textField;
+    public static TextArea textArea;
+    public static JFXTextField textField;
     public JFXButton btnSend;
     public FontAwesomeIconView btnImages;
     public JFXToggleButton tglDarkMode;
     public Label lblUser;
+    public Label lblAddress;
     public AnchorPane mainPane;
 
     final int PORT = 5000;
-    Socket accept;
-    DataInputStream dataInputStream;
-    DataOutputStream dataOutputStream;
+    public FontAwesomeIconView btnEmojis;
+    private Socket socket;
+    private String hostIp;
+    private String userName;
+    private Client client;
 
-    BufferedReader in;
-    PrintWriter out;
+    public void initialize(){
+        this.hostIp = LoginFormController.hostIp;
+        this.userName = LoginFormController.userName;
+        lblUser.setText(userName);
+        lblAddress.setText(hostIp);
 
-    public void run() throws IOException {
-        accept = new Socket("localhost", PORT);
+        try {
+            socket = new Socket(hostIp, PORT);
+            client = new Client(socket, userName);
+            client.receiveMessage();
+            client.sendMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        in = new BufferedReader(new InputStreamReader(accept.getInputStream()));
-        out = new PrintWriter(accept.getOutputStream(), true);
+    }
 
-        while (true){
-            String line = in.readLine();
+    public static void messageReceived(String message){
+        textArea.appendText(message);
+    }
 
-            if (line.startsWith("SUBMITNAME")) {
-                out.println("name");
-            }else if (line.startsWith("NAMEACCEPTED")){
-                textField.setEditable(true);
-            }else if (line.startsWith("MESSAGE")){
-                textArea.appendText(line.substring(8)+"\n");
-            }
+    public void sendOnAction(ActionEvent actionEvent) throws IOException {
+        String msgToSend = textField.getText();
+        if (!msgToSend.isEmpty()){
+
+            messageReceived(msgToSend);
+            client.sendMessage(msgToSend);
+            textField.clear();
         }
     }
 
-    public void initialize(){
-    }
-
-
-//    public void initialize() {
-//        new Thread(() -> {
-//            try {
-//                socket = new Socket("localhost",PORT);
-//
-//                dataOutputStream = new DataOutputStream(socket.getOutputStream());
-//                dataInputStream = new DataInputStream(socket.getInputStream());
-//
-//                while (!massage.equals("exit")) {
-//                    massage = dataInputStream.readUTF();
-//                    textArea.appendText("\n"+massage);
-//                }
-//
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }).start();
-//    }
-
-    public void sendOnAction(ActionEvent actionEvent) throws IOException {
-        out.println(textField.getText());
-        textField.clear();
-//        dataOutputStream.writeUTF(name+" : "+textField.getText().trim());
-//        dataOutputStream.flush();
-//        textArea.appendText("\n"+name+" : "+textField.getText().trim());
-//        textField.clear();
-    }
-
     public void btnSendEnteredMouse(MouseEvent event) {
-        btnSend.setStyle("-fx-background-color: #8ded6f;  -fx-background-radius: 7;");
+        btnSend.setStyle("-fx-background-color:  #3fc469;  -fx-background-radius: 7;");
     }
 
     public void btnSendExitedMouse(MouseEvent event) {
-        btnSend.setStyle("-fx-background-color:  #6fbbed; -fx-background-radius: 7;");
+        btnSend.setStyle("-fx-background-color:   #1495ff; -fx-background-radius: 7;");
     }
 
-    public void closeOnAction(MouseEvent event) {
-    }
-
-    public void minimizeOnAction(MouseEvent event) {
-    }
 
     public void sendImagesOnAction(MouseEvent event) {
     }
 
-    public void darkModeOnAction(ActionEvent actionEvent) {
+    public void openEmojiPanelOnAction(MouseEvent event) {
+        try {
+            Robot r = new Robot();
+            r.keyPress(KeyEvent.VK_WINDOWS);
+            r.keyPress(KeyEvent.VK_PERIOD);
+            r.keyRelease(KeyEvent.VK_WINDOWS);
+            r.keyRelease(KeyEvent.VK_PERIOD);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
     }
 }
