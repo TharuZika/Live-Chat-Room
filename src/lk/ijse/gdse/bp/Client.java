@@ -17,13 +17,24 @@ public class Client implements Initializable {
     private String userName;
     private String hostIp;
 
+    public Client(Socket socket, String userName){
+        this.socket=socket;
+        try {
+            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.userName = userName;
+        } catch (IOException e) {
+            end(socket, bufferedReader, bufferedWriter);
+        }
+    }
+
 
 //Inner Class Start Here ----------------------
     public static class Handler implements Runnable{
         public ArrayList<Handler> handlers = new ArrayList<>();
 
         private Socket socket;
-        private String userName;
+        static String userName;
         BufferedWriter bufferedWriter;
         BufferedReader bufferedReader;
 
@@ -72,15 +83,7 @@ public class Client implements Initializable {
     }
 //Inner Class End Here ----------------------
 
-    public Client(Socket socket, String userName){
-        this.socket=socket;
-        try {
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
-            end(socket, bufferedReader, bufferedWriter);
-        }
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

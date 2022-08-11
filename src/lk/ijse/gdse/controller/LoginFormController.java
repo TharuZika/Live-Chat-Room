@@ -35,6 +35,7 @@ public class LoginFormController {
             userName = txtUserName.getText();
             hostIp = txtIp.getText();
 
+
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/gdse/view/ClientForm.fxml"))));
             stage.setTitle(userName);
