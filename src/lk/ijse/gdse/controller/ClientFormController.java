@@ -10,10 +10,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -28,38 +26,63 @@ public class ClientFormController{
     public AnchorPane mainPane;
 
     final int PORT = 5000;
-    Socket socket;
+    Socket accept;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
-    String name = "User";
-    String massage = "";
+    BufferedReader in;
+    PrintWriter out;
 
-    public void initialize() {
-        new Thread(() -> {
-            try {
-                socket = new Socket("localhost",PORT);
+    public void run() throws IOException {
+        accept = new Socket("localhost", PORT);
 
-                dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                dataInputStream = new DataInputStream(socket.getInputStream());
+        in = new BufferedReader(new InputStreamReader(accept.getInputStream()));
+        out = new PrintWriter(accept.getOutputStream(), true);
 
-                while (!massage.equals("exit")) {
-                    massage = dataInputStream.readUTF();
-                    textArea.appendText("\n"+massage);
-                }
+        while (true){
+            String line = in.readLine();
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (line.startsWith("SUBMITNAME")) {
+                out.println("name");
+            }else if (line.startsWith("NAMEACCEPTED")){
+                textField.setEditable(true);
+            }else if (line.startsWith("MESSAGE")){
+                textArea.appendText(line.substring(8)+"\n");
             }
-        }).start();
+        }
     }
 
+    public void initialize(){
+    }
+
+
+//    public void initialize() {
+//        new Thread(() -> {
+//            try {
+//                socket = new Socket("localhost",PORT);
+//
+//                dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//                dataInputStream = new DataInputStream(socket.getInputStream());
+//
+//                while (!massage.equals("exit")) {
+//                    massage = dataInputStream.readUTF();
+//                    textArea.appendText("\n"+massage);
+//                }
+//
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//    }
+
     public void sendOnAction(ActionEvent actionEvent) throws IOException {
-        dataOutputStream.writeUTF(name+" : "+textField.getText().trim());
-        dataOutputStream.flush();
-        textArea.appendText("\n"+name+" : "+textField.getText().trim());
+        out.println(textField.getText());
         textField.clear();
+//        dataOutputStream.writeUTF(name+" : "+textField.getText().trim());
+//        dataOutputStream.flush();
+//        textArea.appendText("\n"+name+" : "+textField.getText().trim());
+//        textField.clear();
     }
 
     public void btnSendEnteredMouse(MouseEvent event) {
