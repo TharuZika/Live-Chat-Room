@@ -40,7 +40,6 @@ public class LoginFormController {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/ijse/gdse/view/ClientForm.fxml"))));
             stage.setTitle(userName);
 
-            System.out.println("IP Address: " + hostIp + "\nUsername: " + userName);
         }
 
     }

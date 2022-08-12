@@ -1,118 +1,91 @@
 package lk.ijse.gdse.bp;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import lk.ijse.gdse.controller.ClientFormController;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Client implements Initializable {
+public class Client implements Initializable{
 
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String userName;
-    private String hostIp;
 
     public Client(Socket socket, String userName){
-        this.socket=socket;
         try {
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.socket=socket;
+            this.bufferedWriter=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.userName = userName;
-        } catch (IOException e) {
-            end(socket, bufferedReader, bufferedWriter);
+        }catch (IOException e){
+            closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
 
-
-//Inner Class Start Here ----------------------
-    public static class Handler implements Runnable{
-        public ArrayList<Handler> handlers = new ArrayList<>();
-
-        private Socket socket;
-        static String userName;
-        BufferedWriter bufferedWriter;
-        BufferedReader bufferedReader;
-
-        public Handler(Socket socket){
-            this.socket = socket;
-            try {
-                this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                this.userName = bufferedReader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            this.handlers.add(this);
-            System.out.println(userName+" Connected to the Server");
-
-        }
-
-        @Override
-        public void run() {
-            while (socket.isConnected()){
-                try {
-                    String clientMessage = bufferedReader.readLine();
-                    sendMessageToServer(clientMessage);
-                } catch (IOException e) {
-                    handlers.remove(this);
-                    end(socket,bufferedReader,bufferedWriter);
-                }
-            }
-        }
-        
-        public void sendMessageToServer(String message){
-            for (Handler handler : handlers){
-                try {
-                    if (!handler.userName.equals(userName)) {
-                        handler.bufferedWriter.write(message);
-                        handler.bufferedWriter.newLine();
-                        handler.bufferedWriter.flush();
-                    }
-                }catch (IOException e){
-                    handlers.remove(this);
-                    end(socket,bufferedReader,bufferedWriter);
-                }
-            }
-        }
-        
-    }
-//Inner Class End Here ----------------------
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-
-    }
-
-    public void sendMessage(String message){
+    public void send(String msg){
         try {
-            bufferedWriter.write(userName+" :"+message);
+//            while (socket.isConnected()){
+            bufferedWriter.write(userName+" : "+msg);
             bufferedWriter.newLine();
             bufferedWriter.flush();
-        } catch (IOException e) {
-            end(socket, bufferedReader, bufferedWriter);
+//            }
+        }catch (IOException e){
+            closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
 
-    public void sendMessage(){
-
+    public void send(){
         try {
             bufferedWriter.write(userName);
             bufferedWriter.newLine();
             bufferedWriter.flush();
-        } catch (IOException e) {
-           end(socket, bufferedReader, bufferedWriter);
+        }catch (IOException e){
+            closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
 
-    public static void end(Socket socket,BufferedReader bufferedReader,BufferedWriter bufferedWriter){
+//    public void listenForMsg(){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (socket.isConnected()){
+//                    try {
+//                        msgFromGroupChat=bufferedReader.readLine();
+////                        ClientFormController clientFormController=new ClientFormController();
+////                        clientFormController.showMsg(msgFromGroupChat);
+//                        System.out.println(msgFromGroupChat);///////////////////////
+//                    }catch (IOException e){
+//                        closeEverything(socket,bufferedReader,bufferedWriter);
+//                    }
+//                }
+//            }
+//        }).start();
+//    }
+
+    public void receiveMessage(TextArea textArea){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (socket.isConnected()){
+                    try {
+                        String msgFromChat=bufferedReader.readLine();
+                        ClientFormController.addLabel(msgFromChat, textArea);
+                    }catch (IOException e){
+                        closeEverything(socket,bufferedReader,bufferedWriter);
+                        break;
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public void closeEverything(Socket socket,BufferedReader bufferedReader,BufferedWriter bufferedWriter){
         try {
             if (bufferedReader != null){
                 bufferedReader.close();
@@ -128,21 +101,10 @@ public class Client implements Initializable {
         }
     }
 
-    public void receiveMessage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (socket.isConnected()){
-                    try {
-                        String messageRec = bufferedReader.readLine();
-                        ClientFormController.messageReceived(messageRec);
-                    } catch (IOException e) {
-                        end(socket, bufferedReader, bufferedWriter);
-                        break;
-                    }
-                }
-            }
-        }).start();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+//        this.receiveMessage(vBox);
+//        this.send();
     }
-
 }
+

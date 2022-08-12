@@ -46,8 +46,8 @@
             <Cursor fx:constant="HAND" />
          </cursor></FontAwesomeIconView>
       <FontAwesomeIconView fill="#717889" glyphName="USER_CIRCLE" layoutX="29.0" layoutY="64.0" size="30" text="" />
-      <FontAwesomeIconView fill="#00ff1e" glyphName="CIRCLE_ALT" layoutX="31.0" layoutY="28.0" size="15" />
-      <Label layoutX="49.0" layoutY="14.0" text="Connected to :" />
+      <FontAwesomeIconView fx:id="icoGreen" fill="#00ff1e" glyphName="CIRCLE_ALT" layoutX="31.0" layoutY="28.0" size="15" />
+      <Label fx:id="lblConnected" layoutX="49.0" layoutY="14.0" text="Connected to :" />
       <Label fx:id="lblAddress" layoutX="130.0" layoutY="14.0" text="https://192.168.8.1">
          <font>
             <Font name="System Italic" size="12.0" />

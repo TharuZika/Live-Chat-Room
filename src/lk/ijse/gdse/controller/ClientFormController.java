@@ -4,11 +4,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.gdse.bp.Client;
+
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,7 +19,12 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientFormController{
-    public static TextArea textArea;
+
+    public FontAwesomeIconView icoGreen;
+    public Label lblConnected;
+    @FXML
+    public TextArea textArea;
+    @FXML
     JFXTextField textField;
     public JFXButton btnSend;
     public FontAwesomeIconView btnImages;
@@ -36,36 +44,29 @@ public class ClientFormController{
         this.userName = LoginFormController.userName;
         lblUser.setText(userName);
         lblAddress.setText(hostIp);
-
         try {
-            socket = new Socket(hostIp, PORT);
-            client = new Client(socket, userName);
-            client.receiveMessage();
-            client.sendMessage();
+            Socket socket = new Socket(hostIp,PORT);
+            client=new Client(socket,userName);
+            client.receiveMessage(textArea);
+            client.send();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        client.receiveMessage(textArea);
 
     }
 
-    public static void messageReceived(String message){
-        textArea.appendText(message);
+    public static void addLabel(String message, TextArea textArea){
+        textArea.appendText(message+"\n");
     }
 
-    public void sendOnAction(ActionEvent actionEvent) throws IOException {
-        System.out.println("1");
-//        String msgToSend = textField.getText();
-        System.out.println("2");
-//        if (!textField.getText().isEmpty()){
-        textField.setText("ane hutto");
+    public void sendOnAction(ActionEvent actionEvent)  {
+        String msgToSend=textField.getText();
 
-//            messageReceived(textField.getText());
-//            System.out.println("4");
-//            client.sendMessage(textField.getText());
-//            System.out.println("5");
-//            textField.clear();
-//            System.out.println("6");
-//        }
+        addLabel("Me: "+msgToSend, textArea);
+
+        client.send(msgToSend);
+        textField.clear();
     }
 
     public void btnSendEnteredMouse(MouseEvent event) {
