@@ -1,5 +1,5 @@
 # Live-Chat-Room
-Customer support Live chat of Play Tech Pvt Ltd
+Customer support Live chat for Play Tech Pvt Ltd
 
 ![image](https://user-images.githubusercontent.com/101235785/184452859-66ebb19c-8090-46ac-8df3-0e64fc1c8d87.png)
 
