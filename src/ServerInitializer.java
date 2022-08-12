@@ -13,6 +13,7 @@ public class ServerInitializer {
     }
 
     public static void main(String[] args) throws IOException {
+        System.out.println("Server Started..");
         ServerSocket serverSocket = new ServerSocket(PORT);
         ServerInitializer server = new ServerInitializer(serverSocket);
         server.startServer();
@@ -29,6 +30,7 @@ public class ServerInitializer {
                 thread.start();
             }
         }catch (IOException e){
+            System.out.println("Server Ended..");
             close();
         }
 

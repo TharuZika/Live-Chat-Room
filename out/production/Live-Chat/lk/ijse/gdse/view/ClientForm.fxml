@@ -6,58 +6,56 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="mainPane" prefHeight="630.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.controller.ClientFormController">
    <children>
-      <Label fx:id="lblUser" layoutX="64.0" layoutY="36.0" text="Client" textFill="#717889">
+      <Label fx:id="lblUser" layoutX="27.0" layoutY="14.0" text="Mark" textFill="#717889">
          <font>
-            <Font name="System Bold" size="23.0" />
+            <Font name="Ebrima Bold" size="23.0" />
          </font>
       </Label>
-      <TextArea fx:id="textArea" editable="false" layoutX="26.0" layoutY="77.0" prefHeight="479.0" prefWidth="649.0">
+      <JFXTextField fx:id="textField" focusColor="#ffffff00" layoutX="96.0" layoutY="570.0" prefHeight="60.0" prefWidth="498.0" promptText=" Type something to send..." style="-fx-background-color: transparent;" unFocusColor="#ffffff00">
          <font>
-            <Font size="20.0" />
-         </font>
-      </TextArea>
-      <AnchorPane layoutX="26.0" layoutY="571.0" prefHeight="39.0" prefWidth="48.0" style="-fx-background-color: #97b3c2; -fx-background-radius: 7;" />
-      <JFXTextField fx:id="textField" focusColor="#ffffff00" layoutX="64.0" layoutY="571.0" prefHeight="39.0" prefWidth="508.0" promptText="Message" style="-fx-background-color: #97b3c2; -fx-background-radius: 7;" unFocusColor="#ffffff00">
-         <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="Comic Sans MS Italic" size="15.0" />
          </font>
       </JFXTextField>
-      <FontAwesomeIconView fx:id="btnImages" fill="WHITE" glyphName="CAMERA" layoutX="528.0" layoutY="602.0" onMouseClicked="#sendImagesOnAction" size="30">
+      <TextArea fx:id="textArea" editable="false" layoutY="76.0" prefHeight="496.0" prefWidth="700.0" style="-fx-control-inner-background: #e1f8fa; -fx-background-color: transparent; -fx-text-fill: #4a4a4a;">
+         <font>
+            <Font name="SansSerif Regular" size="16.0" />
+         </font>
+      </TextArea>
+      <FontAwesomeIconView fx:id="btnImages" fill="#82919e" glyphName="PAPERCLIP" layoutX="58.0" layoutY="611.0" onMouseClicked="#sendImagesOnAction" size="30">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
-      <JFXButton fx:id="btnSend" layoutX="596.0" layoutY="571.0" onAction="#sendOnAction" onMouseEntered="#btnSendEnteredMouse" onMouseExited="#btnSendExitedMouse" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #1495ff; -fx-background-radius: 7;" text="SEND" textFill="WHITE">
+      <JFXButton fx:id="btnSend" layoutX="595.0" layoutY="579.0" onAction="#sendOnAction" onMouseEntered="#btnSendEnteredMouse" onMouseExited="#btnSendExitedMouse" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #1495ff; -fx-background-radius: 7;" text="SEND" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="41.76" radius="18.155" width="32.86" />
+         </effect>
       </JFXButton>
-      <FontAwesomeIconView fx:id="btnEmojis" fill="WHITE" glyphName="SMILE_ALT" layoutX="31.0" layoutY="601.0" onMouseClicked="#openEmojiPanelOnAction" size="30">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></FontAwesomeIconView>
-      <FontAwesomeIconView fill="#717889" glyphName="USER_CIRCLE" layoutX="29.0" layoutY="64.0" size="30" text="" />
-      <FontAwesomeIconView fx:id="icoGreen" fill="#00ff1e" glyphName="CIRCLE_ALT" layoutX="31.0" layoutY="28.0" size="15" />
-      <Label fx:id="lblConnected" layoutX="49.0" layoutY="14.0" text="Connected to :" />
-      <Label fx:id="lblAddress" layoutX="130.0" layoutY="14.0" text="https://192.168.8.1">
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </Label>
-      <FontAwesomeIconView glyphName="COMMENTS_ALT" layoutX="484.0" layoutY="59.0" size="60" />
-      <Text layoutX="556.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Live-Chat">
+      <FontAwesomeIconView fx:id="icoGreen" fill="#00ff1e" glyphName="CIRCLE_ALT" layoutX="28.0" layoutY="58.0" size="15" />
+      <Label fx:id="lblConnected" layoutX="47.0" layoutY="44.0" text="Online" />
+      <FontAwesomeIconView fill="#4a4a4a" glyphName="COMMENTS_ALT" layoutX="484.0" layoutY="59.0" size="60" />
+      <Text fill="#4a4a4a" layoutX="556.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Live-Chat">
          <font>
             <Font name="Arial Bold Italic" size="26.0" />
          </font>
       </Text>
+      <FontAwesomeIconView fx:id="btnEmojis" fill="#82919e" glyphName="SMILE_ALT" layoutX="13.0" layoutY="613.0" onMouseClicked="#openEmojiPanelOnAction" size="35">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
    </children>
 </AnchorPane>

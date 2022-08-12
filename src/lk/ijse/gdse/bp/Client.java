@@ -75,7 +75,7 @@ public class Client implements Initializable{
                 while (socket.isConnected()){
                     try {
                         String msgFromChat=bufferedReader.readLine();
-                        ClientFormController.addLabel(msgFromChat, textArea);
+                        ClientFormController.messageSendToEve(msgFromChat, textArea);
                     }catch (IOException e){
                         closeEverything(socket,bufferedReader,bufferedWriter);
                         break;

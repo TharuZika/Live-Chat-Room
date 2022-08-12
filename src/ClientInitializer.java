@@ -19,6 +19,7 @@ public class ClientInitializer extends Application {
         Scene mainScene = new Scene(path);
         primaryStage.setScene(mainScene);
         primaryStage.centerOnScreen();
+        primaryStage.setTitle("LOGIN TO LIVE-CHAT");
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setResizable(false);
         primaryStage.show();

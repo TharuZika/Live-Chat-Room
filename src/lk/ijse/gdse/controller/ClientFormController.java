@@ -20,7 +20,6 @@ import java.net.Socket;
 
 public class ClientFormController{
 
-    public FontAwesomeIconView icoGreen;
     public Label lblConnected;
     @FXML
     public TextArea textArea;
@@ -29,7 +28,6 @@ public class ClientFormController{
     public JFXButton btnSend;
     public FontAwesomeIconView btnImages;
     public Label lblUser;
-    public Label lblAddress;
     public AnchorPane mainPane;
 
     final int PORT = 5000;
@@ -40,12 +38,16 @@ public class ClientFormController{
     private Client client;
 
     public void initialize(){
+        System.out.println("Username: "+userName);
+        System.out.println("Host IP: "+hostIp);
+        System.out.println("Socker: "+socket);
+
+        messageSendToEve("You Joined the Chat..", textArea);
         this.hostIp = LoginFormController.hostIp;
         this.userName = LoginFormController.userName;
         lblUser.setText(userName);
-        lblAddress.setText(hostIp);
         try {
-            Socket socket = new Socket(hostIp,PORT);
+            socket = new Socket(hostIp,PORT);
             client=new Client(socket,userName);
             client.receiveMessage(textArea);
             client.send();
@@ -56,17 +58,24 @@ public class ClientFormController{
 
     }
 
-    public static void addLabel(String message, TextArea textArea){
+    public static void messageSendToEve(String message, TextArea textArea){
         textArea.appendText(message+"\n");
     }
 
     public void sendOnAction(ActionEvent actionEvent)  {
-        String msgToSend=textField.getText();
+        if (!textField.getText().isEmpty()) {
+            String msgToSend = textField.getText();
 
-        addLabel("Me: "+msgToSend, textArea);
 
-        client.send(msgToSend);
-        textField.clear();
+//        (ComponentOrientation.RIGHT_TO_LEFT);
+            messageSendToEve("Me: " + msgToSend, textArea);
+
+            client.send(msgToSend);
+            textField.clear();
+            textField.requestFocus();
+        }else {
+            textField.requestFocus();
+        }
     }
 
     public void btnSendEnteredMouse(MouseEvent event) {
@@ -82,6 +91,7 @@ public class ClientFormController{
     }
 
     public void openEmojiPanelOnAction(MouseEvent event) {
+        textField.requestFocus();
         try {
             Robot r = new Robot();
             r.keyPress(KeyEvent.VK_WINDOWS);
