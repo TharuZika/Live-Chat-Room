@@ -13,7 +13,7 @@ public class ServerInitializer {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Server Started..");
+        System.out.println("Server is Online");
         ServerSocket serverSocket = new ServerSocket(PORT);
         ServerInitializer server = new ServerInitializer(serverSocket);
         server.startServer();
@@ -23,19 +23,19 @@ public class ServerInitializer {
         try {
             while (!serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
-                System.out.println("New User Connected..");
+                System.out.println("A client trying to connect");
                 ClientHandler handler = new ClientHandler(socket);
 
                 Thread thread = new Thread(handler);
                 thread.start();
             }
         }catch (IOException e){
-            System.out.println("Server Ended..");
             close();
         }
 
     }
     public void close(){
+        System.out.println("Server is Offline");
         try {
             if (serverSocket != null){
                 serverSocket.close();

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="FontAwesomeIcons">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/FontAwesomeIcons" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/FontAwesomeIcons" recursive="false" />
+  </library>
+</component>

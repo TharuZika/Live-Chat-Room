@@ -15,11 +15,12 @@ public class ClientInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        System.out.println("You are online");
         Parent path = FXMLLoader.load(this.getClass().getResource("lk/ijse/gdse/view/LoginForm.fxml"));
         Scene mainScene = new Scene(path);
         primaryStage.setScene(mainScene);
         primaryStage.centerOnScreen();
-        primaryStage.setTitle("LOGIN TO LIVE-CHAT");
+        primaryStage.setTitle("LOGIN");
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setResizable(false);
         primaryStage.show();

@@ -50,6 +50,10 @@ public class Client implements Initializable{
         }
     }
 
+    public void sendImages(){
+
+    }
+
 //    public void listenForMsg(){
 //        new Thread(new Runnable() {
 //            @Override
