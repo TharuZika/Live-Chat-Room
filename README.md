@@ -10,4 +10,4 @@ After Update Ui (AUG-14)
 
 ![image](https://user-images.githubusercontent.com/101235785/184526355-7affae88-7bf1-4403-81cd-338bde7877a3.png)
 
-![image](https://user-images.githubusercontent.com/101235785/184526380-9a7dd626-0849-4ff3-81b9-bcbad3a35dc0.png)
+![image](https://user-images.githubusercontent.com/101235785/184526754-5b61bfa4-d54c-423d-b031-f7a1b5c87eff.png)
