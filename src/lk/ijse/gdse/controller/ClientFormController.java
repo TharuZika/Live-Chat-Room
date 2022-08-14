@@ -12,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -26,6 +25,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.gdse.bp.Client;
 import javafx.geometry.Insets;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -52,7 +54,7 @@ public class ClientFormController{
     public void initialize(){
 
 
-        messageSendToEve("You Joined the Chat..", vBox);
+        messageSendToEve("You Joined the Chat", vBox);
         System.out.println("You are connected to the Server");
 
         this.hostIp = LoginFormController.hostIp;
@@ -81,7 +83,7 @@ public class ClientFormController{
         Text text=new Text(message);
         text.setStyle("-fx-font: 15 arial;");
         TextFlow textFlow=new TextFlow(text);
-        textFlow.setStyle("-fx-background-color: rgb(233,233,235); " +
+        textFlow.setStyle("-fx-background-color: rgb(151,233,255); " +
                 "-fx-background-radius: 20px");
         textFlow.setPadding(new Insets(5,10,5,10));
         hBox.getChildren().add(textFlow);

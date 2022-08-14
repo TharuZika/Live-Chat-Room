@@ -47,8 +47,8 @@
       </FontAwesomeIconView>
       <FontAwesomeIconView fx:id="icoGreen" fill="#00ff1e" glyphName="CIRCLE_ALT" layoutX="42.0" layoutY="62.0" size="15" />
       <Label fx:id="lblConnected" layoutX="61.0" layoutY="48.0" text="Online" textFill="WHITE" />
-      <FontAwesomeIconView fill="WHITE" glyphName="COMMENTS_ALT" layoutX="486.0" layoutY="62.0" size="60" />
-      <Text fill="WHITE" layoutX="558.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Live-Chat">
+      <FontAwesomeIconView fill="WHITE" glyphName="COMMENTS_ALT" layoutX="486.0" layoutY="56.0" size="60" />
+      <Text fill="WHITE" layoutX="558.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Live-Chat">
          <font>
             <Font name="Arial Bold Italic" size="26.0" />
          </font>
@@ -74,9 +74,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MenuButton>
-      <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutY="73.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #283838;">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutY="73.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #202e2e;">
          <content>
-            <VBox fx:id="vBox" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #283838;" />
+            <VBox fx:id="vBox" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #202e2e;" />
          </content>
       </ScrollPane>
    </children>
