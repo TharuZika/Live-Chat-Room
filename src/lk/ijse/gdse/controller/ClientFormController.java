@@ -1,17 +1,20 @@
 package lk.ijse.gdse.controller;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
-import javafx.scene.control.Button;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -24,16 +27,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.gdse.bp.Client;
-import javafx.geometry.Insets;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class ClientFormController{
 
@@ -78,27 +76,41 @@ public class ClientFormController{
         client.receiveMessage(vBox);
     }
 
-    public static void messageSendToEve(String message, VBox vBox){
+
+    public static void messageSendToEve(String message, VBox vBox) {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setPadding(new Insets(5,10,5,10));
-
-        Text text=new Text(message);
-        text.setStyle("-fx-font: 15 arial;");
-        TextFlow textFlow=new TextFlow(text);
-        textFlow.setStyle("-fx-background-color: rgb(151,233,255); " +
-                "-fx-background-radius: 20px");
-        textFlow.setPadding(new Insets(5,10,5,10));
-        hBox.getChildren().add(textFlow);
-
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        if (message.startsWith("C:")){
+            try {
+                System.out.println(message);
+                FileInputStream fileInputStream = new FileInputStream(message);
+                Image image = new Image(fileInputStream, 200, 250, false, false);
+                ImageView view = new ImageView(image);
+                hBox.getChildren().add(view);
                 vBox.getChildren().add(hBox);
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
             }
-        });
+        }else {
+            Text text = new Text(message);
+            text.setStyle("-fx-font: 15 arial;");
+            TextFlow textFlow = new TextFlow(text);
+            textFlow.setStyle("-fx-background-color: rgb(151,233,255); " +
+                    "-fx-background-radius: 20px");
+            textFlow.setPadding(new Insets(5, 10, 5, 10));
+            hBox.getChildren().add(textFlow);
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    vBox.getChildren().add(hBox);
+                }
+            });
+        }
 
     }
+
 
     public void sendOnAction(ActionEvent actionEvent)  {
         if (!textField.getText().isEmpty()) {
@@ -143,28 +155,36 @@ public class ClientFormController{
     }
 
 
-    public void sendImagesOnAction(MouseEvent event) {
+    public void sendImagesOnAction(MouseEvent event) throws IOException {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if (!selectedFile.getPath().isEmpty()) {
 
-            ImageIcon imageIcon = new ImageIcon(selectedFile.getPath());
-            JLabel jLabel = new JLabel(imageIcon);
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER_RIGHT);
+            hBox.setPadding(new Insets(5,5,5,10));
 
-            Image image = imageIcon.getImage();
+            FileInputStream fileInputStream=new FileInputStream(selectedFile.getPath());
+            Image image = new Image(fileInputStream, 200,250,false,false);
+            ImageView view=new ImageView(image);
+            hBox.getChildren().add(view);
+            vBox.getChildren().add(hBox);
 
-            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
 
-            client.sendImages(bufferedImage, image);
+
+
+
+
+
 
         }else {
             textField.requestFocus();
         }
     }
 
-    public void openEmojiPanelOnAction(MouseEvent event) {
+    public void openEmojiPanelOnAction(MouseEvent event) throws UnsupportedEncodingException {
 
 //        textField.requestFocus();
 //        try {
@@ -177,6 +197,12 @@ public class ClientFormController{
 //            e.printStackTrace();
 //        }
         Stage stage = new Stage();
+
+        byte[] a = { (byte)0xf0, (byte)0x9f, (byte)0x98, (byte)0x88 };
+        String s = new String(a,"UTF-8");
+        byte[] b = s.getBytes("UTF-16BE");
+        for ( byte c : b ) { System.out.printf("%02x ",c); }
+
 
         byte[] smiling_eyes = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x81};
         String emoji1 = new String(smiling_eyes, Charset.forName("UTF-8"));
@@ -193,11 +219,12 @@ public class ClientFormController{
         byte[] smiling_open_mouth = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x85};
         String emoji5 = new String(smiling_open_mouth, Charset.forName("UTF-8"));
 
-        Button button1 = new Button(emoji1);
-        Button button2 = new Button(emoji2);
-        Button button3 = new Button(emoji3);
-        Button button4 = new Button(emoji4);
-        Button button5 = new Button(emoji5);
+        JFXButton button1 = new JFXButton(emoji1);
+        JFXButton button2 = new JFXButton(emoji2);
+        JFXButton button3 = new JFXButton(emoji3);
+        JFXButton button4 = new JFXButton(emoji4);
+        JFXButton button5 = new JFXButton(emoji5);
+
 
         GridPane gridPane = new GridPane();
 
