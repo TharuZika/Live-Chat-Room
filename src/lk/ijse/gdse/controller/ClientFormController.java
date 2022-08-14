@@ -26,8 +26,11 @@ import javafx.stage.StageStyle;
 import lk.ijse.gdse.bp.Client;
 import javafx.geometry.Insets;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
@@ -146,9 +149,16 @@ public class ClientFormController{
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if (!selectedFile.getPath().isEmpty()) {
-            client.send(selectedFile.getPath());
-            textField.requestFocus();
-            messageSendToEve(selectedFile.getPath(), vBox);
+
+            ImageIcon imageIcon = new ImageIcon(selectedFile.getPath());
+            JLabel jLabel = new JLabel(imageIcon);
+
+            Image image = imageIcon.getImage();
+
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+
+            client.sendImages(bufferedImage, image);
+
         }else {
             textField.requestFocus();
         }

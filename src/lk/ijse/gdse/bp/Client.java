@@ -5,6 +5,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import lk.ijse.gdse.controller.ClientFormController;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
@@ -31,7 +35,7 @@ public class Client implements Initializable{
     public void send(String msg){
         try {
 //            while (socket.isConnected()){
-            bufferedWriter.write(userName+" : "+msg);
+            bufferedWriter.write(userName+": "+msg);
             bufferedWriter.newLine();
             bufferedWriter.flush();
 //            }
@@ -50,8 +54,19 @@ public class Client implements Initializable{
         }
     }
 
-    public void sendImages(){
+    public void sendImages(BufferedImage bufferedImage, Image image){
+        try {
+            Graphics graphics = bufferedImage.createGraphics();
+            graphics.drawImage(image, 0, 0, null);
+            graphics.dispose();
+//            bufferedWriter.write(ImageIO.write(bufferedImage, "jpg"));
+            bufferedWriter.write(String.valueOf(image));
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
 
+        }catch (IOException e){
+            closeEverything(socket,bufferedReader,bufferedWriter);
+        }
     }
 
 //    public void listenForMsg(){

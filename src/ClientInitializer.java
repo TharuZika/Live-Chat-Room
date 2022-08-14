@@ -1,7 +1,9 @@
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -21,6 +23,7 @@ public class ClientInitializer extends Application {
         primaryStage.setScene(mainScene);
         primaryStage.centerOnScreen();
         primaryStage.setTitle("Login");
+        primaryStage.getIcons().add(new Image(String.valueOf(getClass().getResource("lk/ijse/gdse/assets/chat.png"))));
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setResizable(false);
         primaryStage.show();
