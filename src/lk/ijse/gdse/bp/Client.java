@@ -72,14 +72,14 @@ public class Client implements Initializable{
 //        }).start();
 //    }
 
-    public void receiveMessage(TextArea textArea){
+    public void receiveMessage(VBox vBox){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (socket.isConnected()){
                     try {
                         String msgFromChat=bufferedReader.readLine();
-                        ClientFormController.messageSendToEve(msgFromChat, textArea);
+                        ClientFormController.messageSendToEve(msgFromChat, vBox);
                     }catch (IOException e){
                         closeEverything(socket,bufferedReader,bufferedWriter);
                         break;

@@ -1,6 +1,7 @@
 package lk.ijse.gdse.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -10,10 +11,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,8 +33,8 @@ import java.nio.charset.Charset;
 public class ClientFormController{
 
     public Label lblConnected;
-    @FXML
-    public TextArea textArea;
+    public ScrollPane scrollPane;
+    public VBox vBox;
     @FXML
     JFXTextField textField;
     public JFXButton btnSend;
@@ -45,7 +52,7 @@ public class ClientFormController{
     public void initialize(){
 
 
-        messageSendToEve("You Joined the Chat..", textArea);
+        messageSendToEve("You Joined the Chat..", vBox);
         System.out.println("You are connected to the Server");
 
         this.hostIp = LoginFormController.hostIp;
@@ -58,41 +65,76 @@ public class ClientFormController{
         try {
             socket = new Socket(hostIp,PORT);
             client=new Client(socket,userName);
-            client.receiveMessage(textArea);
+            client.receiveMessage(vBox);
             client.send();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        client.receiveMessage(textArea);
-
+        client.receiveMessage(vBox);
     }
 
-    public static void messageSendToEve(String message, TextArea textArea){
-        textArea.appendText(message+"\n");
+    public static void messageSendToEve(String message, VBox vBox){
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setPadding(new Insets(5,10,5,10));
+
+        Text text=new Text(message);
+        text.setStyle("-fx-font: 15 arial;");
+        TextFlow textFlow=new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: rgb(233,233,235); " +
+                "-fx-background-radius: 20px");
+        textFlow.setPadding(new Insets(5,10,5,10));
+        hBox.getChildren().add(textFlow);
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vBox.getChildren().add(hBox);
+            }
+        });
+
     }
 
     public void sendOnAction(ActionEvent actionEvent)  {
         if (!textField.getText().isEmpty()) {
+
             String message = textField.getText();
 
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER_RIGHT);
+            hBox.setPadding(new Insets(5,5,5,10));
 
-//        (ComponentOrientation.RIGHT_TO_LEFT);
-            messageSendToEve("Me: " + message, textArea);
+            Text text=new Text(message);
+            text.setFill(Color.color(0.934,0.945,0.996));
+            text.setStyle("-fx-font: 15 arial;");
+            TextFlow textFlow=new TextFlow(text);
+            textFlow.setStyle("-fx-color: rgb(239,242,255);" + "-fx-background-color: rgb(8,142,73);" + "-fx-background-radius: 18px");
+            textFlow.setPadding(new Insets(5,10,5,10));
+
+            hBox.getChildren().add(textFlow);
+            vBox.getChildren().add(hBox);
+
 
             client.send(message);
             textField.clear();
             textField.requestFocus();
+
+            if (textField.getText().equals("exit")){
+                Stage window = (Stage) btnSend.getScene().getWindow();
+                window.close();
+            }
+
         }else {
             textField.requestFocus();
         }
     }
 
     public void btnSendEnteredMouse(MouseEvent event) {
-        btnSend.setStyle("-fx-background-color:  #3fc469;  -fx-background-radius: 7;");
+        btnSend.setStyle("-fx-background-color:  #088e49;  -fx-background-radius: 7;");
     }
 
     public void btnSendExitedMouse(MouseEvent event) {
-        btnSend.setStyle("-fx-background-color:   #1495ff; -fx-background-radius: 7;");
+        btnSend.setStyle("-fx-background-color:   #a7a7a7; -fx-background-radius: 7;");
     }
 
 
@@ -104,9 +146,9 @@ public class ClientFormController{
         if (!selectedFile.getPath().isEmpty()) {
             client.send(selectedFile.getPath());
             textField.requestFocus();
-            messageSendToEve(selectedFile.getPath(), textArea);
+            messageSendToEve(selectedFile.getPath(), vBox);
         }else {
-            textArea.requestFocus();
+            textField.requestFocus();
         }
     }
 

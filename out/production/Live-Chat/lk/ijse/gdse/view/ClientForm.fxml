@@ -7,20 +7,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainPane" prefHeight="630.0" prefWidth="691.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.controller.ClientFormController">
+<AnchorPane fx:id="mainPane" prefHeight="620.0" prefWidth="700.0" style="-fx-background-color: #3f454f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.controller.ClientFormController">
    <children>
-      <JFXTextField fx:id="textField" focusColor="#ffffff00" layoutX="96.0" layoutY="570.0" prefHeight="60.0" prefWidth="498.0" promptText=" Type something to send..." style="-fx-background-color: transparent;" unFocusColor="#ffffff00">
+      <JFXTextField fx:id="textField" focusColor="#ffffff00" layoutX="98.0" layoutY="570.0" prefHeight="60.0" prefWidth="496.0" promptText=" Type something to send..." style="-fx-background-color: transparent; -fx-text-fill: #a7a7a7; -fx-prompt-text-fill: #a7a7a7;" unFocusColor="#ffffff00">
          <font>
             <Font name="Comic Sans MS Italic" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnSend" layoutX="595.0" layoutY="579.0" onAction="#sendOnAction" onMouseEntered="#btnSendEnteredMouse" onMouseExited="#btnSendExitedMouse" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #1495ff; -fx-background-radius: 7;" text="SEND" textFill="WHITE">
+      <JFXButton fx:id="btnSend" layoutX="598.0" layoutY="581.0" onAction="#sendOnAction" onMouseEntered="#btnSendEnteredMouse" onMouseExited="#btnSendExitedMouse" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #a7a7a7; -fx-background-radius: 7;" text="SEND" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -31,7 +32,7 @@
             <DropShadow blurType="GAUSSIAN" height="41.76" radius="18.155" width="32.86" />
          </effect>
       </JFXButton>
-      <Label fx:id="lblUser" layoutX="41.0" layoutY="18.0" text="Name" textFill="#717889">
+      <Label fx:id="lblUser" layoutX="41.0" layoutY="18.0" text="Name" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="23.0" />
          </font>
@@ -39,38 +40,30 @@
             <Cursor fx:constant="WAIT" />
          </cursor>
       </Label>
-      <TextArea fx:id="textArea" editable="false" layoutY="76.0" prefHeight="496.0" prefWidth="700.0" style="-fx-control-inner-background: #e1f8fa; -fx-background-color: transparent; -fx-text-fill: #4a4a4a;">
-         <font>
-            <Font name="SansSerif Regular" size="16.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </TextArea>
-      <FontAwesomeIconView fx:id="btnImages" fill="#82919e" glyphName="CAMERA_RETRO" layoutX="58.0" layoutY="611.0" onMouseClicked="#sendImagesOnAction" size="30">
+      <FontAwesomeIconView fx:id="btnImages" fill="#a7a7a7" glyphName="CAMERA_RETRO" layoutX="58.0" layoutY="611.0" onMouseClicked="#sendImagesOnAction" size="30">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
       <FontAwesomeIconView fx:id="icoGreen" fill="#00ff1e" glyphName="CIRCLE_ALT" layoutX="42.0" layoutY="62.0" size="15" />
-      <Label fx:id="lblConnected" layoutX="61.0" layoutY="48.0" text="Online" />
-      <FontAwesomeIconView fill="#4a4a4a" glyphName="COMMENTS_ALT" layoutX="467.0" layoutY="63.0" size="60" />
-      <Text fill="#4a4a4a" layoutX="539.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Live-Chat">
+      <Label fx:id="lblConnected" layoutX="61.0" layoutY="48.0" text="Online" textFill="WHITE" />
+      <FontAwesomeIconView fill="WHITE" glyphName="COMMENTS_ALT" layoutX="486.0" layoutY="62.0" size="60" />
+      <Text fill="WHITE" layoutX="558.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Live-Chat">
          <font>
             <Font name="Arial Bold Italic" size="26.0" />
          </font>
       </Text>
-      <FontAwesomeIconView fx:id="btnEmojis" fill="#82919e" glyphName="SMILE_ALT" layoutX="13.0" layoutY="613.0" onMouseClicked="#openEmojiPanelOnAction" size="35">
+      <FontAwesomeIconView fx:id="btnEmojis" fill="#a7a7a7" glyphName="SMILE_ALT" layoutX="13.0" layoutY="613.0" onMouseClicked="#openEmojiPanelOnAction" size="35">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
-      <FontAwesomeIconView fill="#5b5b5b" glyphName="ELLIPSIS_V" layoutX="15.0" layoutY="52.0" onMouseClicked="#sendImagesOnAction" size="25">
+      <FontAwesomeIconView fill="WHITE" glyphName="ELLIPSIS_V" layoutX="20.0" layoutY="44.0" onMouseClicked="#sendImagesOnAction" size="25">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </FontAwesomeIconView>
-      <MenuButton layoutX="9.0" layoutY="16.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="51.0" prefWidth="13.0" style="-fx-background-color: transparent;">
+      <MenuButton layoutX="14.0" layoutY="8.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="51.0" prefWidth="13.0" style="-fx-background-color: transparent;" textFill="WHITE">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#logoutOnAction" text="Logout" />
         </items>
@@ -81,5 +74,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MenuButton>
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" layoutY="73.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #283838;">
+         <content>
+            <VBox fx:id="vBox" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #283838;" />
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
