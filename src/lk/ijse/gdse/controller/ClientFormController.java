@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -43,6 +44,8 @@ public class ClientFormController{
     public Label lblConnected;
     public ScrollPane scrollPane;
     public VBox vBox;
+    public AnchorPane rootEmoji;
+    public JFXButton btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,btn14,btn15,btn16,btn17,btn18,btn19,btn20;
     @FXML
     JFXTextField textField;
     public JFXButton btnSend;
@@ -79,6 +82,12 @@ public class ClientFormController{
             e.printStackTrace();
         }
         client.receiveMessage(vBox);
+
+        try {
+            customizeEmoji();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void imagesSendToEve(BufferedImage image) throws IOException {
@@ -188,20 +197,7 @@ public class ClientFormController{
         }
     }
 
-    public void openEmojiPanelOnAction(MouseEvent event) throws UnsupportedEncodingException {
-
-//        textField.requestFocus();
-//        try {
-//            Robot r = new Robot();
-//            r.keyPress(KeyEvent.VK_WINDOWS);
-//            r.keyPress(KeyEvent.VK_PERIOD);
-//            r.keyRelease(KeyEvent.VK_WINDOWS);
-//            r.keyRelease(KeyEvent.VK_PERIOD);
-//        } catch (AWTException e) {
-//            e.printStackTrace();
-//        }
-        Stage stage = new Stage();
-
+    public void customizeEmoji() throws UnsupportedEncodingException {
         byte[] a = { (byte)0xf0, (byte)0x9f, (byte)0x98, (byte)0x88 };
         String s = new String(a,"UTF-8");
         byte[] b = s.getBytes("UTF-16BE");
@@ -223,37 +219,63 @@ public class ClientFormController{
         byte[] smiling_open_mouth = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x85};
         String emoji5 = new String(smiling_open_mouth, Charset.forName("UTF-8"));
 
-        JFXButton button1 = new JFXButton(emoji1);
-        JFXButton button2 = new JFXButton(emoji2);
-        JFXButton button3 = new JFXButton(emoji3);
-        JFXButton button4 = new JFXButton(emoji4);
-        JFXButton button5 = new JFXButton(emoji5);
+        {btn1.setText(emoji1);
+        btn2.setText(emoji2);
+        btn3.setText(emoji3);
+        btn4.setText(emoji4);
+        btn5.setText(emoji5);
+        btn6.setText(emoji1);
+        btn7.setText(emoji2);
+        btn8.setText(emoji3);
+        btn9.setText(emoji4);
+        btn10.setText(emoji5);
+        btn11.setText(emoji1);
+        btn12.setText(emoji2);
+        btn13.setText(emoji3);
+        btn14.setText(emoji4);
+        btn15.setText(emoji5);
+        btn16.setText(emoji1);
+        btn17.setText(emoji2);
+        btn18.setText(emoji3);
+        btn19.setText(emoji4);
+        btn20.setText(emoji5);}
 
 
-        GridPane gridPane = new GridPane();
 
-        gridPane.setMinSize(350, 300);
+//        GridPane gridPane = new GridPane();
+//        gridPane.setMinSize(350, 300);
+//        gridPane.setPadding(new Insets(2, 15, 2, 0));
+//        gridPane.setVgap(5);
+//        gridPane.setHgap(5);
+//        gridPane.setAlignment(Pos.CENTER);
+//
+//        gridPane.add(btn1, 1, 0);
+//        gridPane.add(btn2, 1, 1);
+//        gridPane.add(btn3, 2, 0);
+//        gridPane.add(btn4, 2, 1);
+//        gridPane.add(btn5, 3, 0);
 
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
+//        rootEmoji.getChildren().add(gridPane);
 
-        gridPane.setVgap(5);
-        gridPane.setHgap(5);
 
-        gridPane.setAlignment(Pos.CENTER);
+    }
 
-        gridPane.add(button1, 1, 0);
-        gridPane.add(button2, 1, 1);
-        gridPane.add(button3, 2, 0);
-        gridPane.add(button4, 2, 1);
-        gridPane.add(button5, 3, 0);
-
-        Scene scene = new Scene(gridPane, 350, 300);
-        stage.setTitle("Grid Layout");
-        stage.setScene(scene);
-        stage.alwaysOnTopProperty();
-        stage.initStyle(StageStyle.UTILITY);
-        stage.show();
-
+    public void openEmojiPanelOnAction(MouseEvent event) throws UnsupportedEncodingException {
+        if (!rootEmoji.isVisible()) {
+            rootEmoji.setVisible(true);
+        }else {
+            rootEmoji.setVisible(false);
+        }
+//        textField.requestFocus();
+//        try {
+//            Robot r = new Robot();
+//            r.keyPress(KeyEvent.VK_WINDOWS);
+//            r.keyPress(KeyEvent.VK_PERIOD);
+//            r.keyRelease(KeyEvent.VK_WINDOWS);
+//            r.keyRelease(KeyEvent.VK_PERIOD);
+//        } catch (AWTException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -261,5 +283,22 @@ public class ClientFormController{
         Stage window = (Stage) mainPane.getScene().getWindow();
         window.setTitle("LOGIN");
         window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
+    }
+
+    public void emojiSetOnAction(ActionEvent actionEvent) {
+        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                JFXButton btn = (JFXButton) event.getSource();
+                if (btn.getId().equals(btn1.getId()))
+                    System.out.println("emoji1");
+                else if (btn.getId().equals(btn2.getId()))
+                    System.out.println("emoji2");
+            }
+        };
+    }
+
+    public void closeEmojiPaneOnAction(ActionEvent actionEvent) {
+        rootEmoji.setVisible(false);
     }
 }
