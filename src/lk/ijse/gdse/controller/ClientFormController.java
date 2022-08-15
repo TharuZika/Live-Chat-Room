@@ -28,13 +28,18 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.ijse.gdse.bp.Client;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.zip.InflaterOutputStream;
 
 public class ClientFormController{
 
+    private static Object img;
     public Label lblConnected;
     public ScrollPane scrollPane;
     public VBox vBox;
@@ -76,6 +81,10 @@ public class ClientFormController{
         client.receiveMessage(vBox);
     }
 
+    public static void imagesSendToEve(BufferedImage image) throws IOException {
+        ImageIO.write(image, "jpg", new File("E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\test.jpg"));
+
+    }
 
     public static void messageSendToEve(String message, VBox vBox) {
         HBox hBox = new HBox();
@@ -172,12 +181,7 @@ public class ClientFormController{
             hBox.getChildren().add(view);
             vBox.getChildren().add(hBox);
 
-
-
-
-
-
-
+            client.sendImages(selectedFile.getAbsoluteFile().getCanonicalPath());
 
         }else {
             textField.requestFocus();

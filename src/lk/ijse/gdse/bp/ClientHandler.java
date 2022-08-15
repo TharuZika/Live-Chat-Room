@@ -1,7 +1,12 @@
 package lk.ijse.gdse.bp;
 
+import lk.ijse.gdse.controller.ClientFormController;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 public class ClientHandler implements Runnable{
@@ -12,6 +17,8 @@ public class ClientHandler implements Runnable{
     private Socket socket;
     BufferedReader bufferedReader;
     BufferedWriter bufferedWriter;
+    InputStream inputStream;
+    OutputStream outputStream;
     private String userName;
 
     public ClientHandler(Socket socket){
@@ -19,6 +26,8 @@ public class ClientHandler implements Runnable{
             this.socket=socket;
             this.bufferedWriter=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.inputStream=socket.getInputStream();
+            this.outputStream = socket.getOutputStream();
 
 
             this.userName = bufferedReader.readLine();
@@ -43,8 +52,43 @@ public class ClientHandler implements Runnable{
                 endClient(socket,bufferedReader,bufferedWriter);
                 break;
             }
+//            Image read -------------------->
+            try {
+                byte[] sizeAr = new byte[4];
+                inputStream.read(sizeAr);
+                int size = ByteBuffer.wrap(sizeAr).asIntBuffer().get();
+
+                byte[] imageAr = new byte[size];
+                inputStream.read(imageAr);
+
+                BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageAr));
+                ImageIO.write(image, "jpg", new File("E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\down.jpg"));
+
+                processImage(image);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    private void processImage(BufferedImage image) throws IOException {
+//        BufferedImage image = ImageIO.read(new File("E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\down.jpg"));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ImageIO.write(image, "jpg", byteArrayOutputStream);
+        for (ClientHandler clientHandler : handlers) {
+            try {
+                byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
+                clientHandler.outputStream.write(size);
+                clientHandler.outputStream.write(byteArrayOutputStream.toByteArray());
+                clientHandler.outputStream.flush();
+
+                socket.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public void serverMessage(String message){
         for (ClientHandler clientHandler : handlers){
