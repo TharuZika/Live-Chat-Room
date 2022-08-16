@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -79,9 +80,9 @@
             <VBox fx:id="vBox" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #202e2e;" />
          </content>
       </ScrollPane>
-      <AnchorPane fx:id="rootEmoji" layoutX="14.0" layoutY="296.0" prefHeight="246.0" prefWidth="308.0" style="-fx-background-color: #bde0e0; -fx-background-radius: 7;">
+      <AnchorPane fx:id="rootEmoji" layoutX="14.0" layoutY="296.0" prefHeight="246.0" prefWidth="308.0" style="-fx-background-color: #bde0e0; -fx-background-radius: 7;" visible="false">
          <children>
-            <JFXButton fx:id="btn1" layoutX="13.0" layoutY="27.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn1" layoutX="13.0" layoutY="27.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -89,7 +90,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn2" layoutX="71.0" layoutY="27.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn2" layoutX="71.0" layoutY="27.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -97,7 +98,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn3" layoutX="128.0" layoutY="27.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn3" layoutX="128.0" layoutY="27.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -105,7 +106,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn4" layoutX="186.0" layoutY="27.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn4" layoutX="186.0" layoutY="27.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -113,7 +114,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn5" layoutX="244.0" layoutY="27.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn5" layoutX="244.0" layoutY="27.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -121,7 +122,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn6" layoutX="13.0" layoutY="80.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn6" layoutX="13.0" layoutY="80.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -129,7 +130,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn7" layoutX="71.0" layoutY="80.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn7" layoutX="71.0" layoutY="80.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -137,7 +138,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn8" layoutX="128.0" layoutY="80.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn8" layoutX="128.0" layoutY="80.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -145,7 +146,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn9" layoutX="186.0" layoutY="80.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn9" layoutX="186.0" layoutY="80.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -153,7 +154,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn10" layoutX="244.0" layoutY="80.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn10" layoutX="244.0" layoutY="80.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -161,7 +162,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn11" layoutX="13.0" layoutY="133.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn11" layoutX="13.0" layoutY="133.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -169,7 +170,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn12" layoutX="71.0" layoutY="133.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn12" layoutX="71.0" layoutY="133.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -177,7 +178,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn13" layoutX="128.0" layoutY="133.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn13" layoutX="128.0" layoutY="133.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -185,7 +186,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn14" layoutX="186.0" layoutY="133.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn14" layoutX="186.0" layoutY="133.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -193,7 +194,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn15" layoutX="244.0" layoutY="133.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn15" layoutX="244.0" layoutY="133.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -201,7 +202,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn16" layoutX="13.0" layoutY="186.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn16" layoutX="13.0" layoutY="186.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -209,7 +210,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn17" layoutX="71.0" layoutY="186.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn17" layoutX="71.0" layoutY="186.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -217,7 +218,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn18" layoutX="128.0" layoutY="186.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn18" layoutX="128.0" layoutY="186.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -225,7 +226,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn19" layoutX="186.0" layoutY="186.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn19" layoutX="186.0" layoutY="186.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -233,7 +234,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btn20" layoutX="244.0" layoutY="186.0" onAction="#emojiSetOnAction" style="-fx-background-color: white; -fx-background-radius: 100;" text="😁">
+            <JFXButton fx:id="btn20" layoutX="244.0" layoutY="186.0" onAction="#emojiSetOnAction" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text=" ">
                <font>
                   <Font size="22.0" />
                </font>
@@ -249,6 +250,26 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <EmojiOneView disable="true" glyphName="RELAXED" layoutX="76.0" layoutY="65.0" size="38" text="☺" />
+            <EmojiOneView disable="true" glyphName="NEUTRAL_FACE" layoutX="18.0" layoutY="65.0" size="38" />
+            <EmojiOneView disable="true" glyphName="SMILEY" layoutX="133.0" layoutY="65.0" size="38" text="😃" />
+            <EmojiOneView disable="true" glyphName="SWEAT_SMILE" layoutX="191.0" layoutY="65.0" size="38" />
+            <EmojiOneView disable="true" glyphName="JOY" layoutX="249.0" layoutY="65.0" size="38" />
+            <EmojiOneView disable="true" glyphName="SMIRK" layoutX="249.0" layoutY="117.0" size="38" />
+            <EmojiOneView disable="true" glyphName="SUNGLASSES" layoutX="18.0" layoutY="117.0" size="38" />
+            <EmojiOneView disable="true" glyphName="YUM" layoutX="76.0" layoutY="117.0" size="38" />
+            <EmojiOneView disable="true" glyphName="WINK" layoutX="133.0" layoutY="117.0" size="38" />
+            <EmojiOneView disable="true" glyphName="RELIEVED" layoutX="191.0" layoutY="117.0" size="38" />
+            <EmojiOneView disable="true" glyphName="ANGRY" layoutX="249.0" layoutY="170.0" size="38" />
+            <EmojiOneView disable="true" glyphName="SWEAT" layoutX="18.0" layoutY="170.0" size="38" />
+            <EmojiOneView disable="true" glyphName="CRY" layoutX="76.0" layoutY="170.0" size="38" />
+            <EmojiOneView disable="true" glyphName="SOB" layoutX="133.0" layoutY="170.0" size="38" />
+            <EmojiOneView disable="true" glyphName="SCREAM" layoutX="191.0" layoutY="170.0" size="38" />
+            <EmojiOneView disable="true" glyphName="MIDDLE_FINGER" layoutX="249.0" layoutY="223.0" size="38" />
+            <EmojiOneView disable="true" glyphName="HEART" layoutX="18.0" layoutY="223.0" size="38" />
+            <EmojiOneView disable="true" glyphName="THUMBSUP" layoutX="76.0" layoutY="223.0" size="38" />
+            <EmojiOneView disable="true" glyphName="V" layoutX="133.0" layoutY="223.0" size="38" />
+            <EmojiOneView disable="true" glyphName="MUSCLE" layoutX="191.0" layoutY="223.0" size="38" />
          </children>
          <effect>
             <DropShadow blurType="GAUSSIAN" color="#00ff4478" height="35.82" radius="15.1875" width="26.93" />

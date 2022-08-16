@@ -21,8 +21,8 @@ public class Client implements Initializable{
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String userName;
-    OutputStream outputStream;
-    InputStream inputStream;
+//    OutputStream outputStream;
+//    InputStream inputStream;
     ImageIcon imageIcon;
 
     public Client(Socket socket, String userName){
@@ -30,35 +30,32 @@ public class Client implements Initializable{
             this.socket=socket;
             this.bufferedWriter=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.outputStream = socket.getOutputStream();
-            this.inputStream = socket.getInputStream();
+//            this.outputStream = socket.getOutputStream();
+//            this.inputStream = socket.getInputStream();
             this.userName = userName;
         }catch (IOException e){
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
 
-    public void sendImages(String path) {
-        try {
-            BufferedImage image = ImageIO.read(new File(path));
-
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", byteArrayOutputStream);
-
-            byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
-            outputStream.write(size);
-            outputStream.write(byteArrayOutputStream.toByteArray());
-            outputStream.flush();
-
-            socket.close();
-
-        }catch (IOException e){
-            closeEverything(socket,bufferedReader,bufferedWriter);
-        }
-
-
-
-    }
+//    public void sendImages(String path) {
+//        try {
+//            BufferedImage image = ImageIO.read(new File(path));
+//
+//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//            ImageIO.write(image, "jpg", byteArrayOutputStream);
+//
+//            byte[] size = ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
+//            outputStream.write(size);
+//            outputStream.write(byteArrayOutputStream.toByteArray());
+//            outputStream.flush();
+//
+//            socket.close();
+//
+//        }catch (IOException e){
+//            closeEverything(socket,bufferedReader,bufferedWriter);
+//        }
+//    }
 
     public void send(String msg){
         try {
@@ -90,16 +87,16 @@ public class Client implements Initializable{
                         String msgFromChat=bufferedReader.readLine();
                         ClientFormController.messageSendToEve(msgFromChat, vBox);
 
-                        byte[] sizeAr = new byte[4];
-                        inputStream.read(sizeAr);
-                        int size = ByteBuffer.wrap(sizeAr).asIntBuffer().get();
-
-                        byte[] imageAr = new byte[size];
-                        inputStream.read(imageAr);
-
-                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageAr));
-
-                        ClientFormController.imagesSendToEve(image);
+//                        byte[] sizeAr = new byte[4];
+//                        inputStream.read(sizeAr);
+//                        int size = ByteBuffer.wrap(sizeAr).asIntBuffer().get();
+//
+//                        byte[] imageAr = new byte[size];
+//                        inputStream.read(imageAr);
+//
+//                        BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageAr));
+//
+//                        ClientFormController.imagesSendToEve(vBox);
                     }catch (IOException e){
                         closeEverything(socket,bufferedReader,bufferedWriter);
                         break;
@@ -127,8 +124,7 @@ public class Client implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        this.receiveMessage(vBox);
-//        this.send();
+
     }
 }
 

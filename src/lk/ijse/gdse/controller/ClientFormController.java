@@ -5,20 +5,17 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,21 +23,16 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import lk.ijse.gdse.bp.Client;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.zip.InflaterOutputStream;
 
 public class ClientFormController{
 
-    private static Object img;
     public Label lblConnected;
     public ScrollPane scrollPane;
     public VBox vBox;
@@ -57,7 +49,7 @@ public class ClientFormController{
     public FontAwesomeIconView btnEmojis;
     private Socket socket;
     private String hostIp;
-    private String userName;
+    public static String userName;
     private Client client;
 
     public void initialize(){
@@ -82,35 +74,29 @@ public class ClientFormController{
             e.printStackTrace();
         }
         client.receiveMessage(vBox);
-
-        try {
-            customizeEmoji();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
     }
 
-    public static void imagesSendToEve(BufferedImage image) throws IOException {
-        ImageIO.write(image, "jpg", new File("E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\test.jpg"));
-
-    }
+//    public static void imagesSendToEve(VBox vBox) throws IOException {
+//        String selectedFile = "E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\down.jpg";
+//            HBox hBox = new HBox();
+//            hBox.setAlignment(Pos.CENTER_LEFT);
+//            hBox.setPadding(new Insets(5,5,5,10));
+//
+//            FileInputStream fileInputStream=new FileInputStream(selectedFile);
+//            Image image = new Image(fileInputStream, 200,250,false,false);
+//            ImageView view=new ImageView(image);
+//            hBox.getChildren().add(view);
+//            vBox.getChildren().add(hBox);
+//
+//
+//
+//    }
 
     public static void messageSendToEve(String message, VBox vBox) {
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.setPadding(new Insets(5,10,5,10));
-        if (message.startsWith("C:")){
-            try {
-                System.out.println(message);
-                FileInputStream fileInputStream = new FileInputStream(message);
-                Image image = new Image(fileInputStream, 200, 250, false, false);
-                ImageView view = new ImageView(image);
-                hBox.getChildren().add(view);
-                vBox.getChildren().add(hBox);
-            }catch (FileNotFoundException e){
-                e.printStackTrace();
-            }
-        }else {
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER_LEFT);
+            hBox.setPadding(new Insets(5, 10, 5, 10));
+
             Text text = new Text(message);
             text.setStyle("-fx-font: 15 arial;");
             TextFlow textFlow = new TextFlow(text);
@@ -125,8 +111,6 @@ public class ClientFormController{
                     vBox.getChildren().add(hBox);
                 }
             });
-        }
-
     }
 
 
@@ -190,74 +174,13 @@ public class ClientFormController{
             hBox.getChildren().add(view);
             vBox.getChildren().add(hBox);
 
-            client.sendImages(selectedFile.getAbsoluteFile().getCanonicalPath());
+            client.send(selectedFile.getPath());
+
+//            client.sendImages(selectedFile.getAbsoluteFile().getCanonicalPath());
 
         }else {
             textField.requestFocus();
         }
-    }
-
-    public void customizeEmoji() throws UnsupportedEncodingException {
-        byte[] a = { (byte)0xf0, (byte)0x9f, (byte)0x98, (byte)0x88 };
-        String s = new String(a,"UTF-8");
-        byte[] b = s.getBytes("UTF-16BE");
-        for ( byte c : b ) { System.out.printf("%02x ",c); }
-
-
-        byte[] smiling_eyes = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x81};
-        String emoji1 = new String(smiling_eyes, Charset.forName("UTF-8"));
-
-        byte[] tears_of_joy = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x82};
-        String emoji2 = new String(tears_of_joy, Charset.forName("UTF-8"));
-
-        byte[] heart_shaped_eyes = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x83};
-        String emoji3 = new String(heart_shaped_eyes, Charset.forName("UTF-8"));
-
-        byte[] winking_eye = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x84};
-        String emoji4 = new String(winking_eye, Charset.forName("UTF-8"));
-
-        byte[] smiling_open_mouth = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x85};
-        String emoji5 = new String(smiling_open_mouth, Charset.forName("UTF-8"));
-
-        {btn1.setText(emoji1);
-        btn2.setText(emoji2);
-        btn3.setText(emoji3);
-        btn4.setText(emoji4);
-        btn5.setText(emoji5);
-        btn6.setText(emoji1);
-        btn7.setText(emoji2);
-        btn8.setText(emoji3);
-        btn9.setText(emoji4);
-        btn10.setText(emoji5);
-        btn11.setText(emoji1);
-        btn12.setText(emoji2);
-        btn13.setText(emoji3);
-        btn14.setText(emoji4);
-        btn15.setText(emoji5);
-        btn16.setText(emoji1);
-        btn17.setText(emoji2);
-        btn18.setText(emoji3);
-        btn19.setText(emoji4);
-        btn20.setText(emoji5);}
-
-
-
-//        GridPane gridPane = new GridPane();
-//        gridPane.setMinSize(350, 300);
-//        gridPane.setPadding(new Insets(2, 15, 2, 0));
-//        gridPane.setVgap(5);
-//        gridPane.setHgap(5);
-//        gridPane.setAlignment(Pos.CENTER);
-//
-//        gridPane.add(btn1, 1, 0);
-//        gridPane.add(btn2, 1, 1);
-//        gridPane.add(btn3, 2, 0);
-//        gridPane.add(btn4, 2, 1);
-//        gridPane.add(btn5, 3, 0);
-
-//        rootEmoji.getChildren().add(gridPane);
-
-
     }
 
     public void openEmojiPanelOnAction(MouseEvent event) throws UnsupportedEncodingException {
@@ -286,16 +209,152 @@ public class ClientFormController{
     }
 
     public void emojiSetOnAction(ActionEvent actionEvent) {
-        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                JFXButton btn = (JFXButton) event.getSource();
-                if (btn.getId().equals(btn1.getId()))
-                    System.out.println("emoji1");
-                else if (btn.getId().equals(btn2.getId()))
-                    System.out.println("emoji2");
-            }
-        };
+        byte[] natural_face = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x90};
+        String emoji1 = new String(natural_face, Charset.forName("UTF-8"));
+
+        byte[] relaxed = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x83};
+        String emoji2 = new String(relaxed, Charset.forName("UTF-8"));
+
+        byte[] smiley = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x84};
+        String emoji3 = new String(smiley, Charset.forName("UTF-8"));
+
+        byte[] sweat_smile = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x85};
+        String emoji4 = new String(sweat_smile, Charset.forName("UTF-8"));
+
+        byte[] joy = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x82};
+        String emoji5 = new String(joy, Charset.forName("UTF-8"));
+
+        byte[] sunglass = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x8E};
+        String emoji6 = new String(sunglass, Charset.forName("UTF-8"));
+
+        byte[] yum = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x88};
+        String emoji7 = new String(yum, Charset.forName("UTF-8"));
+
+        byte[] wink = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x89};
+        String emoji8 = new String(wink, Charset.forName("UTF-8"));
+
+        byte[] relived = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x87};
+        String emoji9 = new String(relived, Charset.forName("UTF-8"));
+
+        byte[] smirk = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x8F};
+        String emoji10 = new String(smirk, Charset.forName("UTF-8"));
+
+        byte[] sweart = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x93};
+        String emoji11 = new String(sweart, Charset.forName("UTF-8"));
+
+        byte[] cry = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0xA2};
+        String emoji12 = new String(cry, Charset.forName("UTF-8"));
+
+        byte[] sob = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0xAD};
+        String emoji13 = new String(sob, Charset.forName("UTF-8"));
+
+        byte[] scream = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0xB1};
+        String emoji14 = new String(scream, Charset.forName("UTF-8"));
+
+        byte[] angry = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0xA1};
+        String emoji15 = new String(angry, Charset.forName("UTF-8"));
+
+        byte[] heart = new byte[]{(byte)0xE2, (byte)0x99, (byte)0xA5};
+        String emoji16 = new String(heart, Charset.forName("UTF-8"));
+
+        byte[] thumbsup = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x91, (byte)0x8D};
+        String emoji17 = new String(thumbsup, Charset.forName("UTF-8"));
+
+        byte[] v = new byte[]{(byte)0xE2, (byte)0x9C, (byte)0x8C};
+        String emoji18 = new String(v, Charset.forName("UTF-8"));
+
+        byte[] muscle = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x92, (byte)0xAA};
+        String emoji19 = new String(muscle, Charset.forName("UTF-8"));
+
+        byte[] middle_finger = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x96, (byte)0x95};
+        String emoji20 = new String(middle_finger, Charset.forName("UTF-8"));
+
+
+
+
+        JFXButton btn = (JFXButton) actionEvent.getSource();
+        switch (btn.getId()){
+            case "btn1" :
+                textField.requestFocus();
+                textField.appendText(emoji1);
+                break;
+            case "btn2" :
+                textField.requestFocus();
+                textField.appendText(emoji2);
+                break;
+            case "btn3" :
+                textField.requestFocus();
+                textField.appendText(emoji3);
+                break;
+            case "btn4" :
+                textField.requestFocus();
+                textField.appendText(emoji4);
+                break;
+            case "btn5" :
+                textField.requestFocus();
+                textField.appendText(emoji5);
+                break;
+            case "btn6" :
+                textField.requestFocus();
+                textField.appendText(emoji6);
+                break;
+            case "btn7" :
+                textField.requestFocus();
+                textField.appendText(emoji7);
+                break;
+            case "btn8" :
+                textField.requestFocus();
+                textField.appendText(emoji8);
+                break;
+            case "btn9" :
+                textField.requestFocus();
+                textField.appendText(emoji9);
+                break;
+            case "btn10" :
+                textField.requestFocus();
+                textField.appendText(emoji10);
+                break;
+            case "btn11" :
+                textField.requestFocus();
+                textField.appendText(emoji11);
+                break;
+            case "btn12" :
+                textField.requestFocus();
+                textField.appendText(emoji12);
+                break;
+            case "btn13" :
+                textField.requestFocus();
+                textField.appendText(emoji13);
+                break;
+            case "btn14" :
+                textField.requestFocus();
+                textField.appendText(emoji14);
+                break;
+            case "btn15" :
+                textField.requestFocus();
+                textField.appendText(emoji15);
+                break;
+            case "btn16" :
+                textField.requestFocus();
+                textField.appendText(emoji16);
+                break;
+            case "btn17" :
+                textField.requestFocus();
+                textField.appendText(emoji17);
+                break;
+            case "btn18" :
+                textField.requestFocus();
+                textField.appendText(emoji18);
+                break;
+            case "btn19" :
+                textField.requestFocus();
+                textField.appendText(emoji19);
+                break;
+            case "btn20" :
+                textField.requestFocus();
+                textField.appendText(emoji20);
+                break;
+        }
     }
 
     public void closeEmojiPaneOnAction(ActionEvent actionEvent) {
