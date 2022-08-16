@@ -115,6 +115,7 @@ public class ClientFormController{
 
 
     public void sendOnAction(ActionEvent actionEvent)  {
+        rootEmoji.setVisible(false);
         if (!textField.getText().isEmpty()) {
 
             String message = textField.getText();

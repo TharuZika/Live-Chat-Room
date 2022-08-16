@@ -20,6 +20,7 @@ public class LoginFormController {
     public AnchorPane borderErrorUsername;
     public AnchorPane borderErrorIp;
 
+
     public void LoginOnAction(ActionEvent actionEvent) throws IOException {
 
         if (txtUserName.getText().equals("")){

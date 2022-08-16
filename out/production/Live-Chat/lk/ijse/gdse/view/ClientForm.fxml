@@ -10,6 +10,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -275,5 +277,10 @@
             <DropShadow blurType="GAUSSIAN" color="#00ff4478" height="35.82" radius="15.1875" width="26.93" />
          </effect>
       </AnchorPane>
+      <ImageView disable="true" fitHeight="500.0" fitWidth="686.0" layoutY="73.0" opacity="0.14" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/bg.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
