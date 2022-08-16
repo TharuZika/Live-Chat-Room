@@ -31,14 +31,6 @@
       <AnchorPane layoutX="47.0" layoutY="186.0" opacity="0.79" prefHeight="254.0" prefWidth="310.0" style="-fx-background-color: white; -fx-background-radius: 12;">
          <children>
             <Label fx:id="lblError" layoutX="81.0" layoutY="159.0" prefHeight="13.0" prefWidth="155.0" text="Enter your Username First" textAlignment="CENTER" textFill="RED" visible="false" />
-            <JFXButton layoutX="121.0" layoutY="193.0" onAction="#LoginOnAction" style="-fx-background-color: #3fc469; -fx-background-radius: 8;" text="Login" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
          </children></AnchorPane>
       <AnchorPane fx:id="borderErrorUsername" layoutX="62.0" layoutY="294.0" prefHeight="37.0" prefWidth="278.0" style="-fx-border-color: red; -fx-border-radius: 8;" visible="false" />
       <AnchorPane fx:id="borderErrorIp" layoutX="62.0" layoutY="238.0" prefHeight="37.0" prefWidth="278.0" style="-fx-border-color: red; -fx-border-radius: 8;" visible="false" />
@@ -52,6 +44,14 @@
             <Font size="15.0" />
          </font>
       </JFXTextField>
+      <JFXButton layoutX="170.0" layoutY="382.0" onAction="#LoginOnAction" style="-fx-background-color: #3fc469; -fx-background-radius: 8;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
       <Text layoutX="104.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright © TharuZika - All Rights Reserved">
          <font>
             <Font name="System Italic" size="10.0" />
