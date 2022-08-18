@@ -74,7 +74,7 @@ public class ClientHandler implements Runnable{
     }
 
 //    private void processImage(BufferedImage image) throws IOException {
-////        BufferedImage image = ImageIO.read(new File("E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\down.jpg"));
+////      BufferedImage image = ImageIO.read(new File("E:\\GDSE60\\WorkingPlace\\Working\\Live-Chat\\src\\lk\\ijse\\gdse\\assets\\download\\down.jpg"));
 //        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 //        ImageIO.write(image, "jpg", byteArrayOutputStream);
 //        for (ClientHandler clientHandler : handlers) {
